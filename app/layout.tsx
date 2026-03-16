@@ -43,6 +43,13 @@ export default function RootLayout({
             >
               Login
             </Link>
+
+            <Link 
+              href="/cidade"
+              className="text-lg cursor-pointer"
+            >
+              Cidades
+            </Link>
           </div>
         </header>
         {children}

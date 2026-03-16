@@ -34,7 +34,7 @@ body {
 }
 
 .titulo {
-  @apply text-4xl mt-8 grow text-center;
+  @apply text-4xl mt-8 grow;
 }
 
 .formulario {
@@ -52,6 +52,10 @@ body {
 }
 
 .evento-card {
+  @apply p-3 bg-gray-300 w-lg rounded-xl;
+}
+
+.cidade-card {
   @apply p-3 bg-gray-300 w-lg rounded-xl;
 }
 

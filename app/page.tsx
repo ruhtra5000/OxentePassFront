@@ -3,9 +3,11 @@ import { chamadaAPI } from "../backend/chamadaPadrao";
 import Link from 'next/link';
 import "./globals.css";
 
+const pagina = 0
+
 async function getEventos () {
   const response = await chamadaAPI(
-    "/evento?size=3",
+    `/evento?page=${pagina}&size=3`,
     "GET"
   )
 
@@ -26,7 +28,8 @@ export default async function home() {
         <div className="titulo">Eventos</div>
         <div className="flex flex-row mt-5 gap-4 justify-center">
           {eventos.map((item: any) => (
-            <Link 
+            <Link
+              key={item.id} 
               href={`/evento/${item.id}`}
               className="cursor-pointer"
             >

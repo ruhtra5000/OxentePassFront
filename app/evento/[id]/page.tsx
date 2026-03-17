@@ -10,7 +10,7 @@ async function getEvento (idEvento: string) {
   )
 
   if (!response) {
-    console.error("Falha no carregamento de eventos")
+    console.error("Falha no carregamento do evento")
     return
   }
 

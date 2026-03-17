@@ -1,31 +1,61 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --azul-pernambuco: rgb(0, 87, 168);
+  --amarelo-sol: rgb(255, 199, 44);
+  --verde-tropical: rgb(12, 136, 74);
+  --vermelho-frevo: rgb(223, 70, 49);
+  --branco-fundo: rgb(247, 244, 239);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-roboto);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #ededed;
-    --foreground: #0a0a0a;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--branco-fundo);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#navbar {
-  background-color: #bebebe;
+.navbar {
+  background-color: var(--azul-pernambuco);
+  color: var(--branco-fundo);
+  @apply flex flex-row p-4 gap-6;
+}
+
+.titulo {
+  @apply text-4xl mt-8 grow;
+}
+
+.formulario {
+  @apply p-8 mt-8 bg-gray-200 rounded-xl grow;
+}
+
+.campoTexto {
+  background-color: #9e9e9e3d;
+  @apply p-2 mt-1 border border-gray-400 rounded-lg;
+}
+
+.botao-primario {
+  background-color: var(--verde-tropical);
+  @apply p-3 text-gray-100 font-semibold rounded-md cursor-pointer;
+}
+
+.evento-card {
+  @apply p-3 bg-gray-300 w-lg rounded-xl;
+}
+
+.cidade-card {
+  background-color: var(--amarelo-sol);
+  @apply p-3 w-80 rounded-xl text-gray-800 text-center;
+}
+
+.tag-card {
+  background-color: var(--vermelho-frevo);
+  color: var(--branco-fundo);
+  @apply p-2 rounded-md font-semibold;
 }
 

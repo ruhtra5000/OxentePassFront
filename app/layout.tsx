@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "OxentePass",
-  description: "Login screen",
+  description: "Homepage",
 };
 
 export default function RootLayout({

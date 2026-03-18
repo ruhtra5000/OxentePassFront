@@ -1,6 +1,6 @@
-
-import Link from "next/link";
 import { chamadaAPI } from "../../backend/chamadaPadrao";
+import HeaderCard from "../_components/HeaderCard";
+import PontoVendaCard from "../_components/PontoVendaCard";
 
 const page = 0;
 async function getPontoVendas() {
@@ -16,24 +16,32 @@ async function getPontoVendas() {
 }
 
 export default async function PontoVendaPage() {
+    
     const pontoVendas = await getPontoVendas();
+
     return (
-        <>
-            <h1 className="titulo">Pontos de Venda</h1>
-            {
-                pontoVendas.map(
-                    (ponto: any) => (
-                        <ul className="flex flex-row flex-wrap mt-5 gap-4 justify-center">
-                            <Link key={ponto.id} href={`/ponto-venda/${ponto.id}`}>
-                                <li className="card shadow-sm mt-4">
-                                    <h1 className="text-lg">{ponto.nome}</h1>
-                                    <span className="mt-2">{ponto.detalhes}</span>
-                                </li>
-                            </Link>
-                        </ul>
-                    )
-                )
-            }
-        </>
+        <main className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6 lg:px-8">
+            <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
+                <HeaderCard
+                    pageTitle="Catalogo"
+                    headerTitle="Pontos de Venda"
+                    details="Consulte os locais cadastrados, visualize os principais detalhes e acesse cada unidade para ver informacoes completas."
+                    highlightLabel="Total disponivel"
+                    highlightValue={pontoVendas.length}
+                />
+
+                <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                    {pontoVendas.map((p: any) => (
+                        <PontoVendaCard
+                            key={p.id}
+                            id={p.id}
+                            nome={p.nome}
+                            detalhes={p.detalhes}
+                            endereco={p.endereco}
+                        />
+                    ))}
+                </section>
+            </div>
+        </main>
     )
 }

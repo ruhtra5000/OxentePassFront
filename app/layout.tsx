@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Link from 'next/link';
+import Navbar from "./_components/Navbar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -34,30 +34,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header>
-          <div className="navbar">
-            <Link 
-              href="/"
-              className="text-xl mr-4 cursor-pointer"
-            >
-              OxentePass
-            </Link>
-
-            <Link 
-              href="/login"
-              className="text-lg cursor-pointer"
-            >
-              Login
-            </Link>
-
-            <Link 
-              href="/cidade"
-              className="text-lg cursor-pointer"
-            >
-              Cidades
-            </Link>
-          </div>
+          <Navbar />
         </header>
-        {children}
+        <main className="main-container">
+          {children}
+        </main>
       </body>
     </html>
   );

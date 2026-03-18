@@ -2,6 +2,7 @@
 import { chamadaAPI } from "../../backend/chamadaPadrao";
 import Link from 'next/link';
 import "../globals.css";
+import "./page.css";
 
 const pagina = 0
 

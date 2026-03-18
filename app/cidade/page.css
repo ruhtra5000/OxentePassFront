@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+.cidade-card {
+  background-color: var(--amarelo-sol);
+  @apply p-3 w-80 rounded-xl text-gray-800 text-center border-gray-400;
+}
+
+.tag-card {
+  background-color: var(--vermelho-frevo);
+  color: var(--branco-fundo);
+  @apply p-2 rounded-md font-semibold;
+}

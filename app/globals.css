@@ -62,7 +62,7 @@ body {
 .card {
   background: #e3e3e3;
   background: linear-gradient(90deg,rgba(227, 227, 227, 1) 0%, rgba(245, 245, 245, 1) 92%);
- @apply p-3 w-80 rounded-xl text-gray-800 text-center; 
+ @apply p-3 w-80 rounded-xl text-gray-800 text-center shadow-sm mt-4; 
 }
 
 .main-container{

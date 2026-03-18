@@ -26,7 +26,7 @@ export default async function PontoVendaPage() {
                     pageTitle="Catalogo"
                     headerTitle="Pontos de Venda"
                     details="Consulte os locais cadastrados, visualize os principais detalhes e acesse cada unidade para ver informacoes completas."
-                    highlightLabel="Total disponivel"
+                    highlightLabel="Total disponível"
                     highlightValue={pontoVendas.length}
                 />
 

@@ -34,15 +34,6 @@ export default function Navbar() {
                         Cidades
                     </Link>
                 </li>
-
-                <li>
-                    <Link
-                        href="/ponto-venda"
-                        className="text-lg cursor-pointer"
-                    >
-                        Pontos de Venda
-                    </Link>
-                </li>
             </ul>
 
             <ul className="flex items-center gap-4">

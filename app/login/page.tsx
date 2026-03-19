@@ -6,7 +6,7 @@ import { useState } from "react";
 import Link from "next/link";
 import "../globals.css";
 import Form from "../_components/Form";
-import { useAuth } from "../_components/AuthProvider";
+import { useAuth } from "../_components/Auth/AuthProvider";
 import { useToast } from "../_components/ToastProvider";
 
 export default function LoginPage() {
@@ -22,15 +22,15 @@ export default function LoginPage() {
     const { name, value } = e.target;
 
     setFormData((prev) => ({
-        ...prev,
-          [name]: value
+      ...prev,
+      [name]: value
     }));
   };
 
   const formAction = async () => {
     const response = await chamadaAPI(
-      "/usuario/login", 
-      "POST", 
+      "/usuario/login",
+      "POST",
       formData
     )
 

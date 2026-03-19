@@ -2,8 +2,8 @@
 
 import { Star } from "lucide-react";
 import { useState } from "react";
-import { adicionarAvaliacaoEvento } from "../../backend/chamadaPadrao";
-import { useToast } from "./ToastProvider";
+import { adicionarAvaliacaoEvento } from "../../../backend/chamadaPadrao";
+import { useToast } from "../ToastProvider";
 
 type AvaliacaoFormProps = {
     idEvento: number | string;

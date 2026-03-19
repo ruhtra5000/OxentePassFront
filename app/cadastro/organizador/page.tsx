@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { chamadaAPI } from "../../../backend/chamadaPadrao";
 import { useToast } from "../../_components/ToastProvider";
-import { useAuth } from "../../_components/AuthProvider";
+import { useAuth } from "../../_components/Auth/AuthProvider";
 import Form from "../../_components/Form";
 
 export default function CadastroOrganizadorPage() {

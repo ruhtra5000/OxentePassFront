@@ -1,6 +1,6 @@
 import { chamadaAPI } from "../../backend/chamadaPadrao";
 import HeaderCard from "../_components/HeaderCard";
-import PontoVendaCard from "../_components/PontoVendaCard";
+import PontoVendaCard from "../_components/PontoVenda/PontoVendaCard";
 
 const page = 0;
 async function getPontoVendas() {

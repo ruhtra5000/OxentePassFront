@@ -6,7 +6,7 @@ import HeaderCard from "../../_components/HeaderCard";
 import DetailsCard from "../../_components/DetailsCard";
 import ActionCard from "../../_components/ActionCard";
 import { buscarMeuPerfil, buscarMeuPerfilOrganizador } from "../../../backend/chamadaPadrao";
-import { useAuth } from "../../_components/AuthProvider";
+import { useAuth } from "../../_components/Auth/AuthProvider";
 import { useToast } from "../../_components/ToastProvider";
 
 type MeuPerfil = {

@@ -37,8 +37,7 @@ async function getImagens (idEvento: string) {
 
 export default async function Evento ({ params }: { params: { id: string } }) {
   const {id} = await params
-  const eventoTmp = await getEvento(id)
-  const evento = eventoTmp[0]
+  const evento = (await getEvento(id))[0]
   const imagens = await getImagens(id)
 
   return (

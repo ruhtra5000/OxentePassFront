@@ -2,9 +2,9 @@
 
 :root {
   --azul-pernambuco: rgb(0, 87, 168);
-  --amarelo-sol: rgb(255, 199, 44);
-  --verde-tropical: rgb(0, 140, 69);
-  --vermelho-frevo: rgb(227, 28, 35);
+  --amarelo-sol: rgba(255, 202, 57, 0.7);
+  --verde-tropical: rgb(12, 136, 74);
+  --vermelho-frevo: rgb(223, 70, 49);
   --branco-fundo: rgb(247, 244, 239);
 }
 
@@ -15,16 +15,9 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #ededed;
-    --foreground: #0a0a0a;
-  }
-}
-
 body {
   background-color: var(--branco-fundo);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Google Sans Flex", sans-serif;
 }
 
 .navbar {
@@ -38,7 +31,7 @@ body {
 }
 
 .formulario {
-  @apply p-8 mt-8 bg-gray-200 rounded-xl grow;
+  @apply p-8 mt-8 bg-white border border-slate-200 rounded-xl grow;
 }
 
 .campoTexto {
@@ -52,10 +45,19 @@ body {
 }
 
 .evento-card {
-  @apply p-3 bg-gray-300 w-lg rounded-xl;
+  @apply bg-gray-300 w-120 h-80 rounded-xl shadow-sm;
 }
 
-.cidade-card {
-  @apply p-3 bg-gray-300 w-lg rounded-xl;
+.evento-card-data {
+  @apply p-3 text-shadow-xs;
 }
 
+.card {
+  background: #e3e3e3;
+  background: linear-gradient(90deg,rgba(227, 227, 227, 1) 0%, rgba(245, 245, 245, 1) 92%);
+  @apply p-3 w-80 rounded-xl text-gray-800 text-center shadow-sm mt-4; 
+}
+
+.main-container{
+  @apply min-h-screen bg-slate-50 px-4 py-8 sm:px-6 lg:px-8
+}

@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 
 type ToastType = "error" | "success" | "info";
@@ -74,7 +74,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    const limparTimers = () => {
+    const limparTimers = useCallback(() => {
         if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
             timeoutRef.current = null;
@@ -84,9 +84,9 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             clearTimeout(closeTimeoutRef.current);
             closeTimeoutRef.current = null;
         }
-    };
+    }, []);
 
-    const hideToast = () => {
+    const hideToast = useCallback(() => {
         limparTimers();
         setClosing(true);
 
@@ -95,9 +95,9 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             setClosing(false);
             closeTimeoutRef.current = null;
         }, 200);
-    };
+    }, [limparTimers]);
 
-    const showToast = (message: string, type: ToastType = "info") => {
+    const showToast = useCallback((message: string, type: ToastType = "info") => {
         limparTimers();
         setClosing(false);
 
@@ -110,7 +110,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
         timeoutRef.current = setTimeout(() => {
             hideToast();
         }, 4000);
-    };
+    }, [hideToast, limparTimers]);
 
     return (
         <ToastContext.Provider value={{ toast, showToast, hideToast }}>

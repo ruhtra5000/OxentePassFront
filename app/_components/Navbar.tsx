@@ -23,6 +23,13 @@ export default function Navbar() {
             >
               Cidades
             </Link>
+
+            <Link 
+              href="/categoria"
+              className="text-lg cursor-pointer"
+            >
+              Categorias
+            </Link>
             
             <Link 
               href="/ponto-venda"

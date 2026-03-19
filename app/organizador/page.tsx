@@ -40,14 +40,14 @@ export default function organizador () {
             imgSrc="/vendas.png"
             imgAlt="vendas icone"
             texto="Vendas"
-            href="/organizador/vendas"
+            href="/vendas"
           />
 
           <OrgMenuCard 
             imgSrc="/ingressos.png"
             imgAlt="ingressos icone"
             texto="Ingressos"
-            href="/organizador/ingressos"
+            href="/ingressos"
           />
         </div>
       </main>

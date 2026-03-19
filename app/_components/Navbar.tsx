@@ -45,20 +45,11 @@ export default function Navbar() {
                 </li>
 
                 <li>
-                    <Link
-                        href="/vendas"
+                    <Link 
+                        href="/organizador"
                         className="text-lg cursor-pointer"
                     >
-                        Vendas
-                    </Link>
-                </li>
-
-                <li>
-                    <Link
-                        href="/ingressos"
-                        className="text-lg cursor-pointer"
-                    >
-                        Ingressos
+                        Organização
                     </Link>
                 </li>
             </ul>

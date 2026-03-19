@@ -71,3 +71,7 @@ export async function buscarMeuPerfilOrganizador() {
 export async function logoutUsuario() {
     return await chamadaAPI("/auth/logout", "POST");
 }
+
+export async function adicionarAvaliacaoEvento(idEvento, avaliacao) {
+    return await chamadaAPI(`/evento/${idEvento}/addAvaliacao`, "PATCH", avaliacao);
+}

@@ -1,6 +1,7 @@
 
 import { chamadaAPI } from "../../../backend/chamadaPadrao";
-import Link from 'next/link';
+import HeaderCard from "@/app/_components/HeaderCard";
+import { EventoCard } from "@/app/_components/EventoCard";
 import "../../globals.css";
 
 const pagina = 0
@@ -21,7 +22,7 @@ async function getCidade (idCidade: string) {
 
 async function getEventosCidade (cidade: string) {
   const response = await chamadaAPI(
-    `/evento/filtro?cidade=${cidade}&page=${pagina}&size=6`,
+    `/evento/comImg?cidade=${cidade}&page=${pagina}&size=6`,
     "GET"
   )
 
@@ -41,22 +42,19 @@ export default async function cidade ({ params }: { params: { id: string } }) {
   const eventos = await getEventosCidade(cidade.nome)
 
   return (
-    <div>
-      <main>
-        <div className="titulo">{cidade.nome}</div>
-        <p>{cidade.descricao}</p>
+    <div className="flex justify-center">
+      <main className="w-17/20">
+        <HeaderCard
+          pageTitle="Catalogo"
+          headerTitle={cidade.nome}
+          details={cidade.descricao}
+          highlightLabel="Eventos cadastrados"
+          highlightValue={eventos.length}
+        />
 
         <div className="flex flex-row flex-wrap mt-5 gap-4 justify-center">
           {eventos.map((item: any) => (
-            <Link
-              key={item.id} 
-              href={`/evento/${item.id}`}
-              className="cursor-pointer"
-            >
-              <div className="evento-card">
-                <h2 className="text-lg">{item.nome}</h2>
-              </div>
-            </Link>
+            <EventoCard key={item.id} item={item} />
           ))}
         </div>
       </main>

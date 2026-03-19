@@ -40,10 +40,9 @@ export default function cadastro() {
   }
 
   return (
-    <div className="flex flex-row">
-      <div className="w-1/3 flex-auto"></div>
-      <div className="w-1/3 flex-auto">
-        <div className="titulo">Cadastro</div>
+    <div className="flex flex-row justify-center">
+      <div className="w-1/3">
+        <div className="titulo text-center">Cadastro</div>
         <div id="form" className="formulario">
           <form action={formAction}>
             <div id="inputText" className="flex flex-col">
@@ -115,7 +114,6 @@ export default function cadastro() {
           </form>
         </div>
       </div>
-      <div className="w-1/3 flex-auto"></div>
     </div>
   );
 }

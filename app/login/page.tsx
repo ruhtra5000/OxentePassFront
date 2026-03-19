@@ -39,10 +39,9 @@ export default function login() {
   }
 
   return (
-    <div className="flex flex-row">
-      <div className="w-1/3 flex-auto"></div>
-      <div className="w-1/3 flex-auto">
-        <div className="titulo">Login</div>
+    <div className="flex flex-row justify-center">
+      <div className="w-1/3">
+        <div className="titulo text-center">Login</div>
         <div id="form" className="formulario">
           <form action={formAction}>
             <div id="inputText" className="flex flex-col">
@@ -93,7 +92,6 @@ export default function login() {
           </div>
         </div>
       </div>
-      <div className="w-1/3 flex-auto"></div>
     </div>
   );
 }

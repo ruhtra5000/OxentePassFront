@@ -31,7 +31,7 @@ body {
 }
 
 .formulario {
-  @apply p-8 mt-8 bg-gray-200 rounded-xl grow;
+  @apply p-8 mt-8 bg-white border border-slate-200 rounded-xl grow;
 }
 
 .campoTexto {

@@ -50,6 +50,20 @@ export default function RootLayout({
             >
               Cidades
             </Link>
+
+            <Link
+              href="/vendas"
+              className="text-lg cursor-pointer"
+            >
+              Vendas
+            </Link>
+
+            <Link
+              href="/ingressos"
+              className="text-lg cursor-pointer"
+            >
+              Ingressos
+            </Link>
           </div>
         </header>
         {children}

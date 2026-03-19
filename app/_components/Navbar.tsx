@@ -34,6 +34,42 @@ export default function Navbar() {
                         Cidades
                     </Link>
                 </li>
+
+                <li>
+                    <Link
+                        href="/categoria"
+                        className="text-lg cursor-pointer"
+                    >
+                        Categorias
+                    </Link>
+                </li>
+
+                <li>
+                    <Link
+                        href="/ponto-venda"
+                        className="text-lg cursor-pointer"
+                    >
+                        Pontos de Venda
+                    </Link>
+                </li>
+
+                <li>
+                    <Link
+                        href="/vendas"
+                        className="text-lg cursor-pointer"
+                    >
+                        Vendas
+                    </Link>
+                </li>
+
+                <li>
+                    <Link
+                        href="/ingressos"
+                        className="text-lg cursor-pointer"
+                    >
+                        Ingressos
+                    </Link>
+                </li>
             </ul>
 
             <ul className="flex items-center gap-4">

@@ -38,6 +38,13 @@ export default function Navbar() {
               Pontos de Venda
             </Link>
 
+            <Link 
+              href="/organizador"
+              className="text-lg cursor-pointer"
+            >
+              Organização
+            </Link>
+            
             <Link
               href="/vendas"
               className="text-lg cursor-pointer"

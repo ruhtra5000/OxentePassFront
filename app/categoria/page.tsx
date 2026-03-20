@@ -9,7 +9,7 @@ const pagina = 0
 
 async function getCategorias () {
   const response = await chamadaAPI(
-    `/tag?page=${pagina}&size=20`,
+    `/tag?page=${pagina}&size=50`,
     "GET"
   )
 

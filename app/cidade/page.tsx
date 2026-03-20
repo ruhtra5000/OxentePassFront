@@ -4,12 +4,11 @@ import "../globals.css";
 import "./page.css";
 import HeaderCard from "../_components/HeaderCard";
 import { CidadeCard } from "../_components/CidadeCard";
+import { Paginacao } from "../_components/Paginacao";
 
-const pagina = 0
-
-async function getCidades () {
+async function getCidades (pagina: number) {
   const response = await chamadaAPI(
-    `/cidade?page=${pagina}&size=20`,
+    `/cidade?page=${pagina}&size=6`,
     "GET"
   )
 
@@ -18,11 +17,14 @@ async function getCidades () {
     return []
   }
 
-  return response.content
+  return response
 }
 
-export default async function cidades () {
-  const cidades = await getCidades()
+export default async function cidades (props: any) {
+  const searchParams = await props.searchParams;
+  const pagina = Number(searchParams?.pag ?? 0);
+  
+  const cidades = await getCidades(pagina)
 
   return (
     <div className="flex justify-center">
@@ -32,14 +34,19 @@ export default async function cidades () {
           headerTitle="Cidades"
           details="Verifique os eventos nas suas cidades favoritas!"
           highlightLabel="Cidades cadastradas"
-          highlightValue={cidades.length}
+          highlightValue={cidades.content.length}
         />
 
-        <div className="flex flex-row flex-wrap mt-5 gap-4 justify-center">
-          {cidades.map((item: any) => (
+        <div className="flex flex-row flex-wrap mt-5 mb-3 gap-4 justify-center">
+          {cidades.content.map((item: any) => (
             <CidadeCard key={item.id} item={item} />
           ))}
         </div>
+
+        <Paginacao
+          page={pagina}
+          totalPages={cidades.totalPages}
+        />
       </main>
     </div>
   );

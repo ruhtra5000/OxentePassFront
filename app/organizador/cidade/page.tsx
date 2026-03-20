@@ -1,14 +1,13 @@
 
 import { OrgLista } from "@/app/_components/Organizador/OrgLista";
+import { Paginacao } from "@/app/_components/Paginacao";
 import { chamadaAPI } from "../../../backend/chamadaPadrao";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import Image from "next/image";
 import "../../globals.css";
 
-const pagina = 0
-
-async function getCidades () {
+async function getCidades (pagina: number) {
   const response = await chamadaAPI(
     `/cidade?page=${pagina}&size=10`,
     "GET"
@@ -19,7 +18,7 @@ async function getCidades () {
     return []
   }
 
-  return response.content
+  return response
 }
 
 //Faz a comunicação com o back
@@ -47,8 +46,11 @@ async function deletar(formData: FormData) {
   revalidatePath('/organizador/cidade');
 }
 
-export default async function OrgListCidade () {
-  const cidades = await getCidades()
+export default async function OrgListCidade (props: any) {
+  const searchParams = await props.searchParams;
+  const pagina = Number(searchParams?.pag ?? 0);
+
+  const cidades = await getCidades(pagina)
 
   return (
     <div className="flex flex-row justify-center">
@@ -71,7 +73,7 @@ export default async function OrgListCidade () {
         </div>
 
         <OrgLista
-          data={cidades}
+          data={cidades.content}
           columns={[
             { header: "Nome", accessor: "nome" },
             { header: "Descrição", accessor: "descricao" },
@@ -79,6 +81,8 @@ export default async function OrgListCidade () {
           editBasePath={"/organizador/cidade"}
           deleteAction={deletar}
         />
+
+        <Paginacao page={pagina} totalPages={cidades.totalPages}/>
       </main>
     </div>
   );

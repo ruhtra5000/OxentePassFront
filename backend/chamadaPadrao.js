@@ -1,4 +1,3 @@
-// import { ApiError } from "./ApiError";
 
 // Chamada básica
 export async function chamadaAPI (rota, metodo, body = {}) {
@@ -16,20 +15,7 @@ export async function chamadaAPI (rota, metodo, body = {}) {
 
         if (!apiResponse.ok) {
             console.error("Erro no Backend: ", text)
-            return
-            
-            /* 
-            const erroJSON = JSON.parse(text)
-
-            throw new ApiError(
-                erroJSON.status,
-                erroJSON.erro,
-                erroJSON.mensagem,
-                erroJSON.path,
-                erroJSON.detalhes
-            )
-            */
-        }
+        }    
 
         // Certas rotas do back retornam texto puro
         // É bom mudar o back depois, padronizar pra ficar tudo JSON
@@ -43,16 +29,6 @@ export async function chamadaAPI (rota, metodo, body = {}) {
     }
     catch (erro) {
         console.error("Erro no Backend: ", erro)
-        throw new Error (erro.message)
-        /*
-        throw new ApiError(
-            500,
-            "Erro Interno",
-            "erro no servidor",
-            "/",
-            ""
-        )
-        */
     }
 }
 

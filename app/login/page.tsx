@@ -40,7 +40,7 @@ export default function LoginPage() {
     }
 
     await atualizarUsuario();
-    router.push("/");
+    router.back();
     router.refresh();
   }
 

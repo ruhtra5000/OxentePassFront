@@ -4,6 +4,6 @@ export async function buscarMeuPerfil() {
     return await chamadaAPI("/usuario/me", "GET");
 }
 
-export async function buscarMeuPerfilOrganizador() {
-    return await chamadaAPI("/organizador/me", "GET");
+export async function editarUsuario(idUsuario, dados) {
+    return await chamadaAPI(`/usuario/${idUsuario}`, "PATCH", dados);
 }

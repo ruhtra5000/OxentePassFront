@@ -1,7 +1,7 @@
 
 import { chamadaAPI } from "../../backend/chamadaPadrao";
 import HeaderCard from "../_components/HeaderCard";
-import { CidadeCard } from "../_components/CidadeCard";
+import { CidadeCard } from "../_components/Cidade/CidadeCard";
 import { Paginacao } from "../_components/Paginacao";
 import "../globals.css";
 import "./page.css";

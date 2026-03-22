@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CidadeTagCard } from '../_components/CidadeTagCard';
+import { CidadeTagCard } from './CidadeTagCard';
 
 type CidadeCardProps = {
   item: any;

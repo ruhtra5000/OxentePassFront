@@ -1,31 +1,50 @@
+'use client'
 
 import { chamadaAPI } from "../../../../backend/chamadaPadrao";
 import { redirect } from "next/navigation";
 import Form from "@/app/_components/Form";
+import { useState } from "react";
+import { useToast } from "@/app/_components/ToastProvider";
 import "../../../globals.css";
 
-async function criarCategoria (formData: FormData) {
-  'use server'
+export default function criar () {
+  const { showToast } = useToast();
+  const [formData, setFormData] = useState({
+    tag: ""
+  });
 
-  // Criação da categoria
-  const data = {
-    tag: formData.get("tag"),
+  const criarCategoria = async () => {
+    // Criação da categoria
+    const data = {
+      tag: formData.tag
+    }
+
+    const response = await chamadaAPI(
+      "/tag", "POST", data, {
+        returnMeta: true,
+        silenciarErro: false,
+      }
+    )
+    
+    if (!response.ok) {
+      console.error("Falha na criação da categoria")
+      showToast(String(response.data.mensagem), "error")
+      return
+    }
+
+    showToast("Categoria criada!", "success")
+    redirect ("/organizador/categoria")
   }
 
-  const cidade = await chamadaAPI(
-    "/tag", "POST", data
-  )
-  
-  if (!cidade) {
-    console.error("Falha na criação da categoria")
-    return
-  }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
 
-  redirect ("/organizador/categoria") 
-}
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
-
-export default async function criar () {
   return (
     <div className="flex flex-row justify-center">
       <main className="w-3/5">
@@ -43,7 +62,9 @@ export default async function criar () {
             <input 
               type="text" 
               name="tag" 
-              id="tag" 
+              id="tag"
+              value={formData.tag}
+              onChange={handleChange}
               placeholder="Nome da categoria" 
               className="border border-slate-200 rounded-xl p-2"
               required 

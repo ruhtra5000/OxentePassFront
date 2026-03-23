@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import "../cidade/page.css"
+import "../../cidade/page.css"
 
 export function CidadeTagCard({ tags }: any) {
   const router = useRouter()

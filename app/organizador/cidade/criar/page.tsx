@@ -10,13 +10,14 @@ import "../../../globals.css";
 
 export default function criar () {
 	const { showToast } = useToast();
-	const [categorias, setCategorias] = useState<any[]>([]);
+	const [categorias, setCategorias] = useState<any[]>([]);				//todas as categorias
+
 	const [formData, setFormData] = useState({
 		nome: "",
 		descricao: ""
 	});
-	const [selecionadas, setSelecionadas] = useState<number[]>([]);
-  const [novas, setNovas] = useState<string[]>([]);
+	const [selecionadas, setSelecionadas] = useState<number[]>([]); //categorias pós-modificação
+  const [novas, setNovas] = useState<string[]>([]);								//categorias novas (criadas no input de texto)
 
 	const criarCidade = async () => {
 		// Criação da cidade
@@ -40,12 +41,10 @@ export default function criar () {
 
 		// Adição de categorias
 		selecionadas.forEach(async tag => {
-			console.log("selec tag: " + tag)
 			await addCategExistente(cidade.data.id, tag.toString())
 		});
 
 		novas.forEach(async tag => {
-			console.log("nova tag: " + tag)
 			await addCategNova(cidade.data.id, tag.toString())
 		});
 

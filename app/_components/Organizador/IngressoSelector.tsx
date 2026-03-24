@@ -87,7 +87,7 @@ export default function IngressoSelector({ ingressos, setIngressos }: any) {
                   id='quantidadeDisponivel'
                   value={input.quantidadeDisponivel}
                   onChange={handleChange}
-                  min={0}
+                  min={1}
                   className="border border-slate-200 rounded-xl p-2 w-full" 
                 />
               </div>

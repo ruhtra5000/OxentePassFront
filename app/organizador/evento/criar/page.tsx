@@ -141,7 +141,6 @@ export default function criar () {
     }
   }
 
-  // CHECAR PROBLEMA
   const addPontoVenda = async (idEvento: string, ponto: string) => {
     const response = await chamadaAPI(
       `/evento/${idEvento}/addPontoVenda/${ponto}`, "PATCH", {}, {
@@ -157,10 +156,14 @@ export default function criar () {
     }
   }
 
-  // CHECAR PROBLEMA
   const addIngresso = async (idEvento: string, ingresso: Ingresso) => {
     const response = await chamadaAPI(
-      `/evento/${idEvento}/addIngresso`, "PATCH", {ingresso}, {
+      `/evento/${idEvento}/addIngresso`, "PATCH", {
+        tipoIngresso: ingresso.tipoIngresso,
+        valorBase: ingresso.valorBase,
+        quantidadeDisponivel: ingresso.quantidadeDisponivel,
+        temMeiaEntrada: ingresso.temMeiaEntrada
+      }, {
         returnMeta: true,
         silenciarErro: false,
       }

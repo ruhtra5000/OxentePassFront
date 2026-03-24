@@ -71,7 +71,7 @@ export function ListSearchBar({
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-6 flex flex-col gap-3 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm lg:flex-row lg:items-end"
+      className="mb-6 mt-3 flex flex-col gap-3 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm lg:flex-row lg:items-end lg:border-transparent lg:bg-transparent lg:shadow-none"
     >
       <div className="w-full lg:max-w-xs">
         <label

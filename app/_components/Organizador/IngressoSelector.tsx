@@ -37,7 +37,7 @@ export default function IngressoSelector({ ingressos, setIngressos }: any) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) => {
     const { name, value } = e.target;
-    console.log(`input: ${input.tipoIngresso}, ${input.valorBase}, ${input.quantidadeDisponivel}, ${input.temMeiaEntrada}`)
+    
     setInput((prev: any) => ({
       ...prev,
       [name]: value

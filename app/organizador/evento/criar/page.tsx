@@ -1,21 +1,28 @@
 'use client'
 import { chamadaAPI } from "../../../../backend/chamadaPadrao";
+import { criarImagem } from "../../../../backend/chamadasImagem";
 import { redirect } from "next/navigation";
-import Form from "@/app/_components/Form";
-import CategoriaSelector from "@/app/_components/Organizador/CategoriaSelector";
-import { useToast } from "@/app/_components/ToastProvider";
 import { useEffect, useState } from "react";
-import "../../../globals.css";
-import "./page.css"
+import Form from "@/app/_components/Form";
+import { useToast } from "@/app/_components/ToastProvider";
 import { useAuth } from "@/app/_components/Auth/AuthProvider";
+import CategoriaSelector from "@/app/_components/Organizador/CategoriaSelector";
 import PontoVendaSelector from "@/app/_components/Organizador/PontoVendaSelector";
 import IngressoSelector from "@/app/_components/Organizador/IngressoSelector";
+import ImagemSelector from "@/app/_components/Organizador/ImagemSelector";
+import "../../../globals.css";
+import "./page.css"
 
 type Ingresso = {
   tipoIngresso: string,
   valorBase: number,
   quantidadeDisponivel: number,
   temMeiaEntrada: boolean
+}
+
+type Imagem = {
+  file: File,
+  capa: boolean
 }
 
 function formatarData(data: string): string {
@@ -46,21 +53,18 @@ export default function criar () {
     email: '',
     telefone: ''
   });
-  const [tagSelecionadas, setTagSelecionadas] = useState<number[]>([]); //categorias pós-modificação
-  const [tagNovas, setTagNovas] = useState<string[]>([]);								//categorias novas (criadas no input de texto)
+  const [tagSelecionadas, setTagSelecionadas] = useState<number[]>([]);               //categorias pós-modificação
+  const [tagNovas, setTagNovas] = useState<string[]>([]);								              //categorias novas (criadas no input de texto)
   const [pontoVendaSelecionados, setPontoVendaSelecionados] = useState<number[]>([]); //ponto-venda pós-modificação
-  const [ingressos, setIngressos] = useState<Ingresso[]>([]); //ingressos inseridos
+  const [ingressos, setIngressos] = useState<Ingresso[]>([]);                         //ingressos inseridos
+  const [imagens, setImagens] = useState<Imagem[]>([]);                               //imagens inseridas
   
   const criarEvento = async () => {
-    console.log(formData.dataHoraInicio)
-    console.log("cidade: " + formData.cidade)
-
-
     // Criação do evento
     const data = {
       nome: formData.nome,
       descricao: formData.descricao,
-      idOrganizador: 1,
+      idOrganizador: usuario?.id,
       idCidade: formData.cidade,
       dataHoraInicio: formatarData(formData.dataHoraInicio),
       dataHoraFim: formatarData(formData.dataHoraFim),
@@ -105,6 +109,11 @@ export default function criar () {
     // Adição de ingressos
     ingressos.forEach(async ing => {
       await addIngresso(evento.data.id, ing)
+    })
+
+    // Adição de imagens
+    imagens.forEach(async img => {
+      await addImagem(evento.data.id, img)
     })
 
 		showToast("Evento criado!", "success")
@@ -172,6 +181,19 @@ export default function criar () {
     if (!response.ok) {
       console.error("Falha na adição dos ingressos")
       showToast(String(response.data.mensagem), "error")
+      return
+    }
+  }
+
+  const addImagem = async (idEvento: string, img: Imagem) => {
+    const imgData = new FormData()
+    imgData.append("file", img.file)
+
+    const response = await criarImagem(idEvento, img.capa, imgData)
+      
+    if (!response.ok) {
+      console.error("Falha na adição das imagens")
+      showToast("Falha na adição das imagens", "error")
       return
     }
   }
@@ -467,17 +489,22 @@ export default function criar () {
             </div>
           </div>
 
+          <ImagemSelector
+            imagens={imagens}
+            setImagens={setImagens}
+          />
+
+          <IngressoSelector
+            ingressos={ingressos}
+            setIngressos={setIngressos}
+          />
+
           <CategoriaSelector 
             tagsExistentes={categorias}
             selecionadas={tagSelecionadas}
             setSelecionadas={setTagSelecionadas}
             novas={tagNovas}
             setNovas={setTagNovas}
-          />
-
-          <IngressoSelector
-            ingressos={ingressos}
-            setIngressos={setIngressos}
           />
           
           <PontoVendaSelector

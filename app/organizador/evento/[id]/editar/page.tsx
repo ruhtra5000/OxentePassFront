@@ -43,10 +43,10 @@ export default function editar (props: any) {
   const { showToast } = useToast();
   const [idEvento, setIdEvento] = useState<any>();                      //id da URL
   const [evento, setEvento] = useState<any>();                          //evento
+  const [imgEvento, setImgEvento] = useState<any[]>([]);                //todas as imagens do evento
   const [categorias, setCategorias] = useState<any[]>([]);				      //todas as categorias
   const [cidades, setCidades] = useState<any[]>([]);				            //todas as cidades
   const [pontoVendas, setPontoVendas] = useState<any[]>([]);            //todos os pontos de venda
-  const [imgEvento, setImgEvento] = useState<any[]>([]);                //todas as imagens do evento
   
   const [formData, setFormData] = useState({
     nome: "",
@@ -88,44 +88,76 @@ export default function editar (props: any) {
       telefoneContato: formData.telefone
     }
 
-    const evento = await chamadaAPI(
+    const eventoResponse = await chamadaAPI(
       `/evento/${idEvento}`, "PUT", data, {
         returnMeta: true,
         silenciarErro: false,
       }
     )
     
-    if (!evento.ok) {
+    if (!eventoResponse.ok) {
       console.error("Falha na edição do evento")
-      showToast(String(evento.data.mensagem), "error")
+      showToast(String(eventoResponse.data.mensagem), "error")
       return
     }
 
-    // Adição de categorias
+    // Adição e remoção de categorias
 		tagSelecionadas.forEach(async tag => {
-			await addCategExistente(evento.data.id, tag.toString())
+      if (!evento.tags.map((t: any) => Number(t.id)).includes(Number(tag))) {
+        await addCategExistente(evento.id, tag.toString())
+      }
 		});
+
+    evento.tags.forEach(async (tagEvento: any) => {
+      if (!tagSelecionadas.includes(Number(tagEvento.id))) {
+        await delCategExistente(evento.id, tagEvento.id.toString())
+      }
+    });
 
 		tagNovas.forEach(async tag => {
-			await addCategNova(evento.data.id, tag.toString())
+			await addCategNova(evento.id, tag.toString())
 		});
 
-    // Adição de pontos de venda
+    // Adição e remoção de pontos de venda
     pontoVendaSelecionados.forEach(async ponto => {
-      await addPontoVenda(evento.data.id, ponto.toString())
+      if (!evento.pontosVenda.map((p: any) => Number(p.id)).includes(Number(ponto))) {
+        await addPontoVenda(evento.id, ponto.toString())
+      }
     })
 
-    // Adição de ingressos
+    evento.pontosVenda.map((p: any) => Number(p.id)).forEach(async (ponto: any) => {
+      if (!pontoVendaSelecionados.includes(Number(ponto))) {
+        await delPontoVenda(evento.id, ponto.toString())
+      }
+    })
+
+    // Adição e remoção de ingressos
     ingressos.forEach(async ing => {
-      await addIngresso(evento.data.id, ing)
+      if (!("id" in ing) && !evento.ingressos.map((i: any) => i.tipo).includes(ing.tipoIngresso)) {
+        await addIngresso(evento.id, ing)
+      }
     })
 
-    // Adição de imagens
+    evento.ingressos.forEach(async (ing: any) => {
+      if (!ingressos.map((i: Ingresso) => i.tipoIngresso).includes(ing.tipo)) {
+        await delIngresso(evento.id, ing.id.toString())
+      }
+    })
+
+    // Adição e remoção de imagens
     imagens.forEach(async img => {
-      await addImagem(evento.data.id, img)
+      if (img.id == null && img.S3 == null) {
+        await addImagem(evento.id, img)
+      }
     })
 
-		showToast("Evento criado!", "success")
+    imgEvento.forEach(async (img: any) => {
+      if(!imagens.filter((i: Imagem) => i.id != null).map((i: Imagem) => Number(i.id)).includes(img.id)){
+        await delImagem(evento.id, img.id.toString())
+      }
+    })
+
+		showToast("Evento editado!", "success")
     redirect ("/organizador/evento") 
   }
 
@@ -159,6 +191,21 @@ export default function editar (props: any) {
     }
   }
 
+  const delCategExistente = async (idEvento: string, categ: string) => {
+    const response = await chamadaAPI(
+      `/evento/${idEvento}/removerTag/${categ}`, "PATCH", {}, {
+        returnMeta: true,
+        silenciarErro: false,
+      }
+    )
+      
+    if (!response.ok) {
+      console.error("Falha na remoção da categoria " + categ)
+      showToast(String(response.data.mensagem), "error")
+      return
+    }
+  }
+
   const addPontoVenda = async (idEvento: string, ponto: string) => {
     const response = await chamadaAPI(
       `/evento/${idEvento}/addPontoVenda/${ponto}`, "PATCH", {}, {
@@ -169,6 +216,21 @@ export default function editar (props: any) {
       
     if (!response.ok) {
       console.error("Falha na adição dos pontos de venda")
+      showToast(String(response.data.mensagem), "error")
+      return
+    }
+  }
+
+  const delPontoVenda = async (idEvento: string, ponto: string) => {
+    const response = await chamadaAPI(
+      `/evento/${idEvento}/removerPontoVenda/${ponto}`, "PATCH", {}, {
+        returnMeta: true,
+        silenciarErro: false,
+      }
+    )
+      
+    if (!response.ok) {
+      console.error("Falha na remoção dos pontos de venda")
       showToast(String(response.data.mensagem), "error")
       return
     }
@@ -194,6 +256,21 @@ export default function editar (props: any) {
     }
   }
 
+  const delIngresso = async (idEvento: string, idIngresso: string) => {
+    const response = await chamadaAPI(
+      `/evento/${idEvento}/removerIngresso/${idIngresso}`, "PATCH", {}, {
+        returnMeta: true,
+        silenciarErro: false,
+      }
+    )
+      
+    if (!response.ok) {
+      console.error("Falha na remoção dos ingressos")
+      showToast(String(response.data.mensagem), "error")
+      return
+    }
+  }
+
   const addImagem = async (idEvento: string, img: Imagem) => {
     const imgData = new FormData()
     imgData.append("file", img.file)
@@ -203,6 +280,21 @@ export default function editar (props: any) {
     if (!response.ok) {
       console.error("Falha na adição das imagens")
       showToast("Falha na adição das imagens", "error")
+      return
+    }
+  }
+
+  const delImagem = async (idEvento: string, idImagem: string) => {
+    const response = await chamadaAPI(
+      `/evento/${idEvento}/imagens/${idImagem}`, "DELETE", {}, {
+        returnMeta: true,
+        silenciarErro: false,
+      }
+    )
+      
+    if (!response.ok) {
+      console.error("Falha na remoção das imagens")
+      showToast("Falha na remoção das imagens", "error")
       return
     }
   }

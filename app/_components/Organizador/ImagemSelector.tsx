@@ -160,6 +160,7 @@ export default function ImagemSelector({ imagens, setImagens }: any) {
 
               {/* Ações */}
               <button 
+                type="button"
                 onClick={() => remover(index)}
                 title='Remover Imagem'
                 className='w-6 h-6 bg-red-500 text-white rounded-full cursor-pointer'

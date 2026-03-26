@@ -40,7 +40,7 @@ export default function Navbar() {
                         className="text-xl mr-4 cursor-pointer flex items-center gap-2"
                     >
                         <div>
-                            <img src="logo.svg" alt="logo" width={50} />
+                            <img src="/logo.svg" alt="logo" width={50} />
                         </div>
                         <div>
                             <span className="font-bold text-yellow-300">Oxente</span>

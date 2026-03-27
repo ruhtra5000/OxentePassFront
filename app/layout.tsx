@@ -34,16 +34,18 @@ export default function RootLayout({
         <link rel="icon" href="/logo.svg" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50 h-screen overflow-hidden flex flex-col`}
       >
         <AuthProvider>
           <ToastProvider>
-            <header>
-              <Navbar />
-            </header>
-            <main className="main-container">
-              {children}
+            <Navbar />
+            
+            <main className="flex-1 w-full overflow-y-auto relative bg-slate-50">
+              <div className="p-8 w-full max-w-[2500px] mx-auto min-h-full">
+                {children}
+              </div>
             </main>
+            
           </ToastProvider>
         </AuthProvider>
       </body>

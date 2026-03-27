@@ -1,44 +1,53 @@
 'use client'
 
 import { chamadaAPI } from "../../../../backend/chamadaPadrao";
-import { redirect } from "next/navigation";
-import Form from "@/app/_components/Form";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useToast } from "@/app/_components/ToastProvider";
 import "../../../globals.css";
+import { LayoutGeral } from "@/app/_components/LayoutGeral";
+import { HeaderInterno } from "@/app/_components/HeaderInterno";
 
-export default function criar () {
+export default function CriarCategoria() {
   const { showToast } = useToast();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     tag: ""
   });
+  const [carregando, setCarregando] = useState(false);
 
-  const criarCategoria = async () => {
-    // Criação da categoria
+  const criarCategoria = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setCarregando(true);
+
     const data = {
       tag: formData.tag
     }
 
-    const response = await chamadaAPI(
-      "/tag", "POST", data, {
-        returnMeta: true,
-        silenciarErro: false,
+    try {
+      const response = await chamadaAPI(
+        "/tag", "POST", data, {
+          returnMeta: true,
+          silenciarErro: false,
+        }
+      )
+      
+      if (!response.ok) {
+        showToast(String(response.data?.mensagem || "Falha na criação"), "error")
+        return
       }
-    )
-    
-    if (!response.ok) {
-      console.error("Falha na criação da categoria")
-      showToast(String(response.data.mensagem), "error")
-      return
-    }
 
-    showToast("Categoria criada!", "success")
-    redirect ("/organizador/categoria")
+      showToast("✅ Categoria criada com sucesso!", "success")
+      router.push("/organizador/categoria");
+    } catch (error) {
+      showToast("Erro ao conectar com o servidor", "error");
+    } finally {
+      setCarregando(false);
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
     setFormData((prev) => ({
       ...prev,
       [name]: value
@@ -46,32 +55,45 @@ export default function criar () {
   };
 
   return (
-    <div className="flex flex-row justify-center">
-      <main className="w-3/5">
-        <Form
-          title="Criar Categoria"
-          action={criarCategoria}
-          buttons={
-            <>
-              <button type="submit" className="botao-primario">Criar categoria</button>
-            </>
-          }
-        >
-          <div className="flex flex-col gap-2">
-            <label htmlFor="tag">Nome <b className="text-red-500">*</b></label>
+    <LayoutGeral voltarLink="/organizador/categoria" compacto>
+      <HeaderInterno 
+        titulo="Nova Categoria" 
+        subtitulo="Cadastre uma nova tag para organizar seus eventos" 
+        iconeString="🏷️" 
+      />
+
+      <div className="p-8 sm:p-10">
+        <form onSubmit={criarCategoria} className="space-y-8">
+          <div className="flex flex-col gap-3">
+            <label 
+              htmlFor="tag" 
+              className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1"
+            >
+              Nome da Categoria <b className="text-red-500">*</b>
+            </label>
             <input 
               type="text" 
               name="tag" 
               id="tag"
               value={formData.tag}
               onChange={handleChange}
-              placeholder="Nome da categoria" 
-              className="border border-slate-200 rounded-xl p-2"
+              placeholder="Ex: Show, Palestra, Workshop..." 
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl font-bold focus:ring-4 focus:ring-teal-500/10 focus:border-teal-500 outline-none transition-all"
               required 
             />
           </div>
-        </Form>
-      </main>
-    </div>
+
+          <div className="pt-4">
+            <button 
+              type="submit" 
+              disabled={carregando}
+              className="w-full bg-teal-600 hover:bg-teal-700 text-white font-black py-5 rounded-2xl shadow-lg shadow-teal-100 transition-all uppercase text-xs tracking-widest disabled:bg-slate-200 disabled:shadow-none"
+            >
+              {carregando ? "Criando..." : "Finalizar Cadastro"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </LayoutGeral>
   );
 }

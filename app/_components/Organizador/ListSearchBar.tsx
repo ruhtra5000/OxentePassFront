@@ -71,21 +71,21 @@ export function ListSearchBar({
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-6 mt-3 flex flex-col gap-3 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm lg:flex-row lg:items-end lg:border-transparent lg:bg-transparent lg:shadow-none"
+      className="mb-6 mt-3 flex flex-col gap-3 rounded-[2rem] border border-slate-100 bg-white p-3 shadow-xl shadow-slate-200/40 lg:flex-row lg:items-end lg:bg-white/80 lg:backdrop-blur-sm"
     >
-      <div className="w-full lg:max-w-xs">
+      <div className="w-full lg:max-w-[200px]">
         <label
           htmlFor="list-search-field"
-          className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500"
+          className="mb-2 ml-2 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400"
         >
-          <SlidersHorizontal className="h-4 w-4" />
-          Buscar em
+          <SlidersHorizontal className="h-3 w-3" />
+          Filtro
         </label>
         <select
           id="list-search-field"
           value={field}
           onChange={(event) => setField(event.target.value)}
-          className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-teal-500 focus:bg-white"
+          className="w-full cursor-pointer appearance-none rounded-[1.5rem] border-2 border-slate-100 bg-slate-50 px-4 py-3.5 text-sm font-bold text-slate-600 outline-none transition focus:border-emerald-500 focus:bg-white hover:bg-slate-100"
         >
           {filterOptions.map((option) => (
             <option key={option.value} value={option.value}>
@@ -98,40 +98,41 @@ export function ListSearchBar({
       <div className="flex-1">
         <label
           htmlFor="list-search-query"
-          className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500"
+          className="mb-2 ml-2 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400"
         >
-          <Search className="h-4 w-4" />
+          <Search className="h-3 w-3" />
           Termo de busca
         </label>
         <div className="relative">
-          <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+          <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-300" />
           <input
             id="list-search-query"
             type="text"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={placeholder}
-            className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-700 outline-none transition focus:border-teal-500 focus:bg-white"
+            className="w-full rounded-[1.5rem] border-2 border-slate-100 bg-slate-50 py-3.5 pl-12 pr-4 text-sm font-semibold text-slate-700 placeholder:text-slate-300 outline-none transition focus:border-emerald-500 focus:bg-white"
           />
         </div>
       </div>
 
-      <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-        <button
-          type="submit"
-          className="inline-flex items-center justify-center gap-2 rounded-2xl bg-teal-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-teal-700"
-        >
-          <Search className="h-4 w-4" />
-          {submitLabel}
-        </button>
-
+      <div className="flex flex-col gap-2 sm:flex-row lg:justify-end">
         <button
           type="button"
           onClick={handleClear}
-          className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50"
+          title="Limpar filtros"
+          className="inline-flex items-center justify-center gap-2 rounded-[1.2rem] bg-slate-100 px-5 py-3.5 text-sm font-bold text-slate-500 transition hover:bg-slate-200 active:scale-95"
         >
-          <X className="h-4 w-4" />
-          Limpar
+          <X className="h-4 w-4 stroke-[3px]" />
+          <span className="lg:hidden">Limpar</span>
+        </button>
+
+        <button
+          type="submit"
+          className="inline-flex items-center justify-center gap-2 rounded-[1.2rem] bg-emerald-600 px-8 py-3.5 text-sm font-black uppercase tracking-widest text-white shadow-lg shadow-emerald-200 transition-all hover:bg-emerald-700 active:scale-95"
+        >
+          <Search className="h-4 w-4 stroke-[3px]" />
+          {submitLabel}
         </button>
       </div>
     </form>

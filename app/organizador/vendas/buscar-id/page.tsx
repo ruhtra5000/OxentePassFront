@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { Search } from "lucide-react";
-import { chamadaAPI } from "../../../backend/chamadaPadrao";
-import { LayoutGeral } from "../../_components/LayoutGeral";
-import { HeaderInterno } from "../../_components/HeaderInterno";
-import { FormBuscaPadrao } from "../../_components/FormBuscaPadrao";
+import { chamadaAPI } from "../../../../backend/chamadaPadrao";
+import { LayoutGeral } from "../../../_components/LayoutGeral";
+import { HeaderInterno } from "../../../_components/HeaderInterno";
+import { FormBuscaPadrao } from "../../../_components/FormBuscaPadrao";
 
 export default function BuscarVendaPorId() {
   const [idBusca, setIdBusca] = useState('');
@@ -45,7 +45,7 @@ export default function BuscarVendaPorId() {
   const coresStatus = venda ? getCoresDoStatus(venda.status) : { bg: '', text: '' };
 
   return (
-    <LayoutGeral voltarLink="/vendas" compacto>
+    <LayoutGeral voltarLink="/organizador/vendas" scroll>
       <HeaderInterno 
         titulo="Consultar Venda" 
         subtitulo="Buscar venda por id" 

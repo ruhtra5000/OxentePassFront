@@ -70,7 +70,7 @@ export default function CadastroOrganizadorPage() {
 
   if (loading) {
     return (
-      <LayoutGeral voltarLink="/usuario/me">
+      <LayoutGeral voltarLink="/usuario/me" scroll>
         <div className="flex h-[60vh] items-center justify-center w-full">
           <span className="text-sm font-black text-emerald-600 animate-pulse uppercase tracking-[0.2em]">Carregando perfil...</span>
         </div>

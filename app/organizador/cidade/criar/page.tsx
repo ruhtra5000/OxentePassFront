@@ -76,7 +76,7 @@ export default function CriarCidade() {
   };
 
   return (
-    <LayoutGeral voltarLink="/organizador/cidade">
+    <LayoutGeral voltarLink="/organizador/cidade" scroll>
       <HeaderInterno 
         titulo="Cadastrar Nova Cidade"
         subtitulo="Adicione novos destinos e gerencie suas categorias de interesse"

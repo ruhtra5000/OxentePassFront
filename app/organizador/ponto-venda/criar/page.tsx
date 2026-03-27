@@ -55,7 +55,7 @@ export default function CriarPontoVendaPage() {
   const sectionTitleClass = "flex items-center gap-2 text-slate-400 border-b border-slate-100 pb-2 mb-6 mt-8 first:mt-0";
 
   return (
-    <LayoutGeral voltarLink="/organizador/ponto-venda">
+    <LayoutGeral voltarLink="/organizador/ponto-venda" scroll>
       <HeaderInterno 
         titulo="Criar Ponto de Venda"
         subtitulo="Cadastre um novo local físico para venda de ingressos"

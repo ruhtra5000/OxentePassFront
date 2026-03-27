@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { chamadaAPI } from "@/backend/chamadaPadrao";
-import { LayoutGeral } from "../../../_components/LayoutGeral";
-import { HeaderInterno } from "../../../_components/HeaderInterno";
+import { LayoutGeral } from "../../../../_components/LayoutGeral";
+import { HeaderInterno } from "../../../../_components/HeaderInterno";
 import { Ticket, CircleDollarSign, Layers, Info, CheckCircle2, Sparkles } from "lucide-react";
 
 export default function EditarIngressoPage() {
@@ -13,7 +13,7 @@ export default function EditarIngressoPage() {
   const idIngresso = params?.id;
 
   const searchParams = useSearchParams();
-  const urlDeVolta = searchParams?.get('from') || '/ingressos/listar';
+  const urlDeVolta = searchParams?.get('from') || '/organizador/ingressos/listar';
 
   const [eventos, setEventos] = useState<any[]>([]);
   const [carregando, setCarregando] = useState(true);
@@ -87,7 +87,7 @@ export default function EditarIngressoPage() {
   const nomeEventoSelecionado = eventos.find(e => e.id.toString() === formData.eventoId)?.nome || "Evento Vinculado";
 
   return (
-    <LayoutGeral voltarLink={urlDeVolta}>
+    <LayoutGeral voltarLink={urlDeVolta} scroll>
       <HeaderInterno 
         titulo="Editar Lote" 
         subtitulo="Atualize a precificação e detalhes do ingresso" 

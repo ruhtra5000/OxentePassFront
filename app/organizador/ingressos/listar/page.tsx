@@ -1,12 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { chamadaAPI } from "../../../backend/chamadaPadrao";
-import { LayoutGeral } from "../../_components/LayoutGeral";
-import { HeaderInterno } from "../../_components/HeaderInterno";
-import { TabelaIng } from "../../_components/Organizador/Ingressos/TabelaIng";
-import { ConfirmationModal } from "../../_components/Organizador/Ingressos/ConfirmationModal";
-import { ToastCentral } from "../../_components/Organizador/Ingressos/ToastCentral";
+import { chamadaAPI } from "../../../../backend/chamadaPadrao";
+import { LayoutGeral } from "../../../_components/LayoutGeral";
+import { HeaderInterno } from "../../../_components/HeaderInterno";
+import { TabelaIng } from "../../../_components/Organizador/Ingressos/TabelaIng";
+import { ConfirmationModal } from "../../../_components/Organizador/Ingressos/ConfirmationModal";
+import { ToastCentral } from "../../../_components/Organizador/Ingressos/ToastCentral";
 
 export default function ListarIngressosPage() {
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function ListarIngressosPage() {
   }, []);
 
   const handleEditar = (id: number) => {
-    router.push(`/ingressos/editar/${id}`);
+    router.push(`/organizador/ingressos/editar/${id}`);
   };
 
   const handleDeletar = (id: number) => {
@@ -97,7 +97,7 @@ export default function ListarIngressosPage() {
   };
 
   return (
-    <LayoutGeral voltarLink="/ingressos" scroll>
+    <LayoutGeral voltarLink="/organizador/ingressos" scroll>
       <HeaderInterno 
         titulo="Estoque de Lotes" 
         subtitulo="Gestão e listagem de ingressos disponíveis" 

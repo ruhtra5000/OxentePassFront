@@ -1,13 +1,13 @@
 'use client'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { chamadaAPI } from "../../../backend/chamadaPadrao";
-import { LayoutGeral } from "../../_components/LayoutGeral";
-import { HeaderInterno } from "../../_components/HeaderInterno";
-import { FormBuscaPadrao } from "../../_components/FormBuscaPadrao";
-import { GridCards } from "../../_components/GridCards";
-import { ConfirmationModal } from "../../_components/Organizador/Ingressos/ConfirmationModal";
-import { ToastCentral } from "../../_components/Organizador/Ingressos/ToastCentral";
+import { chamadaAPI } from "../../../../backend/chamadaPadrao";
+import { LayoutGeral } from "../../../_components/LayoutGeral";
+import { HeaderInterno } from "../../../_components/HeaderInterno";
+import { FormBuscaPadrao } from "../../../_components/FormBuscaPadrao";
+import { GridCards } from "../../../_components/GridCards";
+import { ConfirmationModal } from "../../../_components/Organizador/Ingressos/ConfirmationModal";
+import { ToastCentral } from "../../../_components/Organizador/Ingressos/ToastCentral";
 
 export default function IngressosDisponiveis() {
   const router = useRouter();
@@ -49,7 +49,7 @@ export default function IngressosDisponiveis() {
   };
 
   return (
-    <LayoutGeral voltarLink="/ingressos" scroll>
+    <LayoutGeral voltarLink="/organizador/ingressos" scroll>
       <HeaderInterno titulo="Disponibilidade" subtitulo="Verifique o estoque de um evento específico" iconeString="📊" />
       
       <div className="bg-white">
@@ -64,7 +64,7 @@ export default function IngressosDisponiveis() {
               <GridCards 
                 ingressos={ingressos} 
                 mensagemVazio="Nenhum ingresso encontrado para este Evento." 
-                onEditar={(id) => router.push(`/ingressos/editar/${id}?from=/ingressos/disponivel`)}
+                onEditar={(id) => router.push(`/organizador/ingressos/editar/${id}?from=/ingressos/disponivel`)}
                 onDeletar={(id) => { setIdParaDeletar(id); setIsModalOpen(true); }}
               />
             </div>

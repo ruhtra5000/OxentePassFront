@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { chamadaAPI } from "@/backend/chamadaPadrao";
-import { LayoutGeral } from "../../_components/LayoutGeral";
-import { HeaderInterno } from "../../_components/HeaderInterno";
+import { LayoutGeral } from "../../../_components/LayoutGeral";
+import { HeaderInterno } from "../../../_components/HeaderInterno";
 import { Ticket, CircleDollarSign, Layers, Info, CheckCircle2, Sparkles } from "lucide-react";
 
 export default function NovoIngressoPage() {
@@ -51,7 +51,7 @@ export default function NovoIngressoPage() {
 
     try {
       const response = await chamadaAPI(`/evento/${formData.eventoId}/addIngresso`, "PATCH", payload);
-      if (response) router.push("/ingressos/listar");
+      if (response) router.push("/organizador/ingressos/listar");
     } catch (error) {
       alert("Erro ao criar ingresso.");
     } finally {
@@ -62,7 +62,7 @@ export default function NovoIngressoPage() {
   const nomeEventoSelecionado = eventos.find(e => e.id.toString() === formData.eventoId)?.nome || "Nome do Evento";
 
   return (
-    <LayoutGeral voltarLink="/ingressos">
+    <LayoutGeral voltarLink="/organizador/ingressos" scroll>
       <HeaderInterno 
         titulo="Configurar Lote" 
         subtitulo="Criação e precificação de ingressos em tempo real" 

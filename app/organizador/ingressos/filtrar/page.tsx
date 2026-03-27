@@ -1,12 +1,12 @@
 'use client'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { chamadaAPI } from "../../../backend/chamadaPadrao";
-import { LayoutGeral } from "../../_components/LayoutGeral";
-import { HeaderInterno } from "../../_components/HeaderInterno";
-import { GridCards } from "../../_components/GridCards";
-import { ConfirmationModal } from "../../_components/Organizador/Ingressos/ConfirmationModal";
-import { ToastCentral } from "../../_components/Organizador/Ingressos/ToastCentral";
+import { chamadaAPI } from "../../../../backend/chamadaPadrao";
+import { LayoutGeral } from "../../../_components/LayoutGeral";
+import { HeaderInterno } from "../../../_components/HeaderInterno";
+import { GridCards } from "../../../_components/GridCards";
+import { ConfirmationModal } from "../../../_components/Organizador/Ingressos/ConfirmationModal";
+import { ToastCentral } from "../../../_components/Organizador/Ingressos/ToastCentral";
 
 export default function FiltrarIngressos() {
   const router = useRouter();
@@ -68,7 +68,7 @@ export default function FiltrarIngressos() {
   };
 
   return (
-    <LayoutGeral voltarLink="/ingressos" scroll>
+    <LayoutGeral voltarLink="/organizador/ingressos" scroll>
       <HeaderInterno titulo="Filtrar Ingressos" subtitulo="Busca avançada de Ingressos" iconeString="⚡" />
       
       <div className="p-8 sm:p-10 bg-white">

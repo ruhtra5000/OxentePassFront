@@ -1,12 +1,11 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { ClipboardList } from "lucide-react";
-import { chamadaAPI } from "../../../backend/chamadaPadrao";
-import { LayoutGeral } from "../../_components/LayoutGeral";
-import { HeaderInterno } from "../../_components/HeaderInterno";
-import { TabelaCompleta } from "../../_components/Organizador/Vendas/TabelaCompleta";
-import { ModalAcoes } from "../../_components/ModalAcoes";
-import "../../globals.css";
+import { chamadaAPI } from "../../../../backend/chamadaPadrao";
+import { LayoutGeral } from "../../../_components/LayoutGeral";
+import { HeaderInterno } from "../../../_components/HeaderInterno";
+import { TabelaCompleta } from "../../../_components/Organizador/Vendas/TabelaCompleta";
+import { ModalAcoes } from "../../../_components/ModalAcoes";
 
 export default function ListarVendas() {
   const [vendas, setVendas] = useState<any[]>([]);
@@ -77,7 +76,7 @@ export default function ListarVendas() {
   };
 
   return (
-    <LayoutGeral voltarLink="/vendas" scroll>
+    <LayoutGeral voltarLink="/organizador/vendas" scroll>
       
       {toast.visivel && (
         <div className={`fixed bottom-6 right-6 z-[100] px-6 py-4 rounded-2xl shadow-2xl font-bold flex items-center gap-3 animate-in slide-in-from-bottom-6 fade-in duration-300 border ${

@@ -25,7 +25,7 @@ export default function CarrinhoPage() {
   const total = itens.reduce((acc, obj) => acc + (obj.valorBase * (obj.qtdCarrinho || 1)), 0);
 
   return (
-    <LayoutGeral voltarLink="/" compacto>
+    <LayoutGeral voltarLink="/" scroll>
       <HeaderInterno 
         titulo="Seu Carrinho" 
         subtitulo="Confira seus itens antes de fechar o pedido" 

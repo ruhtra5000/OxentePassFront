@@ -1,10 +1,10 @@
 'use client'
 import { useState } from 'react';
 import { Filter } from "lucide-react";
-import { chamadaAPI } from "../../../backend/chamadaPadrao";
-import { LayoutGeral } from "../../_components/LayoutGeral";
-import { HeaderInterno } from "../../_components/HeaderInterno";
-import { TabelaSimples } from "../../_components/Organizador/Vendas/TabelaSimples";
+import { chamadaAPI } from "../../../../backend/chamadaPadrao";
+import { LayoutGeral } from "../../../_components/LayoutGeral";
+import { HeaderInterno } from "../../../_components/HeaderInterno";
+import { TabelaSimples } from "../../../_components/Organizador/Vendas/TabelaSimples";
 
 export default function FiltrarVendas() {
   const [status, setStatus] = useState(''); 
@@ -47,7 +47,7 @@ export default function FiltrarVendas() {
   };
 
   return (
-    <LayoutGeral voltarLink="/vendas" scroll>
+    <LayoutGeral voltarLink="/organizador/vendas" scroll>
       <HeaderInterno titulo="Filtrar Vendas" subtitulo="Selecione um status para visualizar" icone={<Filter size={24} className="text-teal-600" />} />
       
       <div className="p-0">

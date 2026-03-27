@@ -1,7 +1,6 @@
 import { chamadaAPI } from "@/backend/chamadaPadrao";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import "../../globals.css";
 
 import { CabecalhoCheckout } from "@/app/_components/CabecalhoCheckout";
 import { CheckoutClienteFluxo } from "@/app/_components/CheckoutClienteFluxo"; 

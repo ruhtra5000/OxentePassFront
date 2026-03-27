@@ -1,13 +1,13 @@
 'use client'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { chamadaAPI } from "../../../backend/chamadaPadrao";
-import { LayoutGeral } from "../../_components/LayoutGeral";
-import { HeaderInterno } from "../../_components/HeaderInterno";
-import { FormBuscaPadrao } from "../../_components/FormBuscaPadrao";
-import { GridCards } from "../../_components/GridCards";
-import { ConfirmationModal } from "../../_components/Organizador/Ingressos/ConfirmationModal";
-import { ToastCentral } from "../../_components/Organizador/Ingressos/ToastCentral";
+import { chamadaAPI } from "../../../../backend/chamadaPadrao";
+import { LayoutGeral } from "../../../_components/LayoutGeral";
+import { HeaderInterno } from "../../../_components/HeaderInterno";
+import { FormBuscaPadrao } from "../../../_components/FormBuscaPadrao";
+import { GridCards } from "../../../_components/GridCards";
+import { ConfirmationModal } from "../../../_components/Organizador/Ingressos/ConfirmationModal";
+import { ToastCentral } from "../../../_components/Organizador/Ingressos/ToastCentral";
 
 export default function BuscarIngressoId() {
   const router = useRouter(); 
@@ -55,7 +55,7 @@ export default function BuscarIngressoId() {
   };
 
   return (
-    <LayoutGeral voltarLink="/ingressos" compacto>
+    <LayoutGeral voltarLink="/organizador/ingressos" scroll>
       <HeaderInterno titulo="Buscar Ingresso" subtitulo="Busca de ingresso por Id" iconeString="🔍" />
       
       <div className="bg-white">
@@ -73,7 +73,7 @@ export default function BuscarIngressoId() {
               <GridCards
                 ingressos={ingresso ? [ingresso] : []} 
                 mensagemVazio="⚠️ Ingresso não encontrado no sistema." 
-                onEditar={(id) => router.push(`/ingressos/editar/${id}?from=/ingressos/buscar-id`)}
+                onEditar={(id) => router.push(`/organizador/ingressos/editar/${id}?from=/ingressos/buscar-id`)}
                 onDeletar={() => setIsModalOpen(true)}
               />
             </div>

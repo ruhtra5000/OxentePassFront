@@ -85,7 +85,7 @@ export default function EditarPontoVendaPage() {
   );
 
   return (
-    <LayoutGeral voltarLink="/organizador/ponto-venda">
+    <LayoutGeral voltarLink="/organizador/ponto-venda" scroll>
       <HeaderInterno 
         titulo="Editar Ponto de Venda"
         subtitulo="Modifique as informações do seu local físico"

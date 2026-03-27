@@ -55,7 +55,7 @@ export default function CriarCategoria() {
   };
 
   return (
-    <LayoutGeral voltarLink="/organizador/categoria" compacto>
+    <LayoutGeral voltarLink="/organizador/categoria" scroll>
       <HeaderInterno 
         titulo="Nova Categoria" 
         subtitulo="Cadastre uma nova tag para organizar seus eventos" 

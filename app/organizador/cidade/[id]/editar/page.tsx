@@ -116,7 +116,7 @@ export default function EditarCidade(props: any) {
   };
 
   return (
-    <LayoutGeral voltarLink="/organizador/cidade">
+    <LayoutGeral voltarLink="/organizador/cidade" scroll>
       <HeaderInterno 
         titulo="Editar Cidade"
         subtitulo="Modifique as informações e categorias deste destino"
